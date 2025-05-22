@@ -40,7 +40,7 @@ export interface PatchAccountDto {
 export type BlockItemDtoType =
   (typeof BlockItemDtoType)[keyof typeof BlockItemDtoType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
 export const BlockItemDtoType = {
   KeyWord: "KeyWord",
   Website: "Website",
@@ -63,7 +63,6 @@ export interface BlockListDto {
 export type AddBlockItemDtoType =
   (typeof AddBlockItemDtoType)[keyof typeof AddBlockItemDtoType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const AddBlockItemDtoType = {
   KeyWord: "KeyWord",
   Website: "Website",

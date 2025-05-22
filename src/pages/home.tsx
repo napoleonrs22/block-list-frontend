@@ -1,64 +1,29 @@
 
-import { Geist, Geist_Mono } from "next/font/google";
-
-import { authControllerGetSessionInfo} from "@/shared/api/generated";
-import { useQuery } from "@tanstack/react-query";
-import { UiButton } from "@/shared/ui/ui-button";
-import { UiTextField } from "@/shared/ui/ui-text-field";
-import { UiSelectField } from "@/shared/ui/ui-select-field";
-import { UILink } from "@/shared/ui/ui-link";
-import { UiSpinner } from "@/shared/ui/ui-spinner";
 import { UiHeader } from "@/shared/ui/ui-header";
-import { SignOutButton } from "@/features/auth/ui/sign-out-button";
-import { useSessionQuery } from "@/entities/session/queries";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { ToggleBlockingButton } from "@/features/toggle-blocking/ui/toggle-blocking-button";
+import { Profile } from "@/widgets/profile";
+import { AddBlockItemForm, BlockList } from "@/features/block-list";
 
 export  function HomePage() {
 
-  const {data} = useSessionQuery()
-  // const {data} = useQuery({
-  //   queryKey:['session'],
-  //   queryFn: ()=> authControllerGetSessionInfo()
-  // });
-  // useEffect(()=>{
-  //   authControllerSignIn({ email: 'test@gmail.com', password: '123456' }).then(
-  //     console.log,
-  //   );
-  // },[])
   return (
-    <main
-      className={'min-h-screen'}
+    <div
+      className={'min-h-screen flex  flex-col'}
     >
-      <UiHeader right={<div> {data?.email}<SignOutButton/></div>}></UiHeader>
-      <UiButton variant="primary">Hey</UiButton>
-      <UiButton variant="secondary">Hey</UiButton>
-      <UiButton variant ="outlined">Sign Out</UiButton>
-      <UiButton variant ="primary">Sign Out</UiButton>
-      
-      <UiTextField label="Text field" inputProps={{placeholder:"Enter exail..."}}></UiTextField>
-      
-      
-      
-      <UiTextField error="Text field" inputProps={{placeholder:"Enter exail..."}}></UiTextField>
-      <UiTextField inputProps={{placeholder:"Enter exail..."}}></UiTextField>
-      <UiSelectField
-        placeholder="Enter exail..."
-        options={[
-          { value: "1", label: "options" },
-        ]}
-      />
-      <UILink href={"/"}>кпвпк</UILink>
-      {/* <UiSpinner className="text text-teal-600 m-2 h-20"></UiSpinner> */}
-      
-    </main>
+      <UiHeader
+       right={<Profile/>}>
+       </UiHeader>
+
+      <div className="grid grid-cols-[200px_14fr]">
+        <aside className="px-5 pt-10">
+          <ToggleBlockingButton/>
+        </aside>
+        <main className="pt-10 px-5">
+          <h1 className="text-2xl mb-8">Block list</h1>
+          <AddBlockItemForm/>
+          <BlockList className="mt-3"/>
+        </main>
+      </div>
+    </div>
   );
 }
